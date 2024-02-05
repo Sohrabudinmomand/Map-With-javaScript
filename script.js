@@ -15,7 +15,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(latitude, longitude)
+    console.log(`https://www.google.com/maps/@34.5034423,69.1329456,14.93z?entry=ttu`)
 
 }, function () {
     alert("could not get your location")
