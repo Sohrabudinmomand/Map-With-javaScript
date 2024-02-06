@@ -15,8 +15,29 @@ const inputElevation = document.querySelector('.form__input--elevation');
 if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(`https://www.google.com/maps/@34.5034423,69.1329456,14.93z?entry=ttu`)
+    console.log(`https://www.google.com/maps/@34.5034423,69.1329456,14.93z?entry=ttu`);
 
-}, function () {
-    alert("could not get your location")
-})
+    const coords = [latitude, longitude];
+
+    const map = L.map('map').setView(coords, 20);
+
+    L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+
+
+    map.on('click', function (mapEvent) {
+        console.log(mapEvent);
+
+        const { lat, lng } = mapEvent.latlng;
+
+        L.marker([lat, lng]).addTo(map)
+            .bindPopup('Workout')
+            .openPopup();
+    });
+},
+    function () {
+        alert("could not get your location")
+    }
+);
